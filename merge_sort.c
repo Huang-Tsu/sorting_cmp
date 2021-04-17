@@ -42,7 +42,7 @@ void merge_sort(int *array, int head, int tail){
 
 	return;
 }
-void merge(int *array, int head, int mid, int tail){
+inline void merge(int *array, int head, int mid, int tail){
 
 	int *left_array = (int*)calloc(mid-head+1, sizeof(int));
 	int *right_array = (int*)calloc(tail-mid, sizeof(int));
@@ -74,7 +74,7 @@ inline void array_copy(int *dest, int *src, int head, int tail){
 		dest[i++] = src[head++];
 	}
 }
-void print_result(int *array, int cnt){
+inline void print_result(int *array, int cnt){
 	for(int i=0; i<cnt; i++){
 		printf("%d\n", array[i]);
 	}

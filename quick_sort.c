@@ -39,7 +39,7 @@ void quick_sort(int *array, int head, int tail){
 
 	return;
 }
-int partition(int *array, int head, int tail){
+inline int partition(int *array, int head, int tail){
 
 	int pivot = array[tail];
 	int temp;
@@ -59,7 +59,7 @@ int partition(int *array, int head, int tail){
 
 	return i;
 }
-void print_result(int *array, int cnt){
+inline void print_result(int *array, int cnt){
 	for(int i=0; i<cnt; i++){
 		printf("%d\n", array[i]);
 	}
