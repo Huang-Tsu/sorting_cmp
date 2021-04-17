@@ -47,5 +47,6 @@ int partition(int *array, int head, int tail){
 	temp = array[j];
 	array[j] = array[i];
 	array[i] = temp;
+
 	return i;
 }
