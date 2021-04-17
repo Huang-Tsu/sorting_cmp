@@ -1,0 +1,5 @@
+	//In merge sort
+1.當資料量到達一千萬筆時，在merge時所產生的子陣列會使用太多的記憶體空間，8gm甚至不夠用，且在程式結束雖然有free，但在工作管理員顯示的記憶體使用量卻不會歸還
+	->https://tmt514.github.io/algorithm-analysis/sorting/in-place-mergesort.html
+	這篇文章介紹到把in-place algorithm加入倒merge sort裡面 (待研究)
+
