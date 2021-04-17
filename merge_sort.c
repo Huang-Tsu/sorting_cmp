@@ -8,8 +8,8 @@ void array_copy(int *dest, int *src, int head, int tail);
 int main(){
 	int input;
 	int *array;
-	array = (int*)calloc((int)1e7, sizeof(int));
 	int cnt = 0;
+	array = (int*)calloc((int)1e7, sizeof(int));
 
 	while(scanf("%d", &array[cnt]) != EOF) cnt++;
 
@@ -57,9 +57,8 @@ void merge(int *array, int head, int mid, int tail){
 
 	free(left_array);
 	free(right_array);
-
 }
-void array_copy(int *dest, int *src, int head, int tail){
+inline void array_copy(int *dest, int *src, int head, int tail){
 	int i = 0;
 	while(head<=tail){
 		dest[i++] = src[head++];
