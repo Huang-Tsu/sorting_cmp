@@ -4,24 +4,25 @@
 
 typedef struct timeval Timeval;
 
-int heap_len = 0;
-
-void node_max(int *array, int idx);
+void heapify(int *array, int idx, int len);
+void build_heap(int *array, int idx, int len);
 void heap_sort(int *array, int idx);
 void print_result(int *array, int cnt);
 
 int main(){
 	int input;
+	int idx=1;
 	register int *array;
 	array = (int*)calloc((int)1e7, sizeof(int));
 	Timeval start;
 	Timeval end;
 	unsigned long diff;
 
-	while(scanf("%d", &array[cnt]) != EOF) cnt++;
+	while(scanf("%d", &array[idx]) != EOF) idx++;
 
 	gettimeofday(&start, NULL);
-	heap_sort(array, 0, cnt-1);
+	build_heap(array, 1, idx-1);
+	heap_sort(array, 1, idx-1);
 	gettimeofday(&end, NULL);
 	diff = 1000000*(end.tv_sec-start.tv_sec) + end.tv_usec-start.tv_usec;
 
@@ -37,11 +38,14 @@ void heap_sort(int *array, int idx){
 
 	
 }
-void node_max(int *array, int idx){
-	
+void heapify(int *array, int idx, int len){
+	if(idx>len/2) return;	
 }
 inline void print_result(int *array, int cnt){
 	for(int i=0; i<cnt; i++){
 		printf("%d\n", array[i]);
 	}
+}
+void build_heap(int *array, int idx, int len){
+	
 }
