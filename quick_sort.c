@@ -9,7 +9,6 @@ int partition(int *array, int head, int tail);
 void print_result(int *array, int cnt);
 
 int main(){
-	int input;
 	register int *array;
 	array = (int*)calloc((int)1e7, sizeof(int));
 	int cnt = 0;
