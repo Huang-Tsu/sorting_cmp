@@ -23,8 +23,8 @@ int main(){
 	gettimeofday(&end, NULL);
 	diff = 1000000*(end.tv_sec-start.tv_sec) + end.tv_usec-start.tv_usec;
 
-	//printf("sorting time:%f\n", diff/1000000.0);
-	print_result(array, cnt);
+	printf("sorting time:%f\n", diff/1000000.0);
+	//print_result(array, cnt);
 
 	free(array);
 	return 0;
