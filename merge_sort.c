@@ -42,26 +42,28 @@ void merge_sort(int *array, int head, int tail){
 	return;
 }
 inline void merge(int *array, int head, int mid, int tail){
-
-	int *left_array = (int*)calloc(mid-head+1, sizeof(int));
-	int *right_array = (int*)calloc(tail-mid, sizeof(int));
-
-	int *left_ptr = left_array;
-	int *right_ptr = right_array;
-	
-	int *left_end = left_array+mid-head+1;
-	int *right_end = right_array+tail-mid;
+	int i=0, j=0, array_now=head;
+	int left_len = mid-head+1;
+	int right_len = tail-mid;
+	int *left_array = (int*)calloc(left_len, sizeof(int));
+	int *right_array = (int*)calloc(right_len, sizeof(int));
 
 	array_copy(left_array, array, head, mid);
 	array_copy(right_array, array, mid+1, tail);
 	
-	while(head<=tail){
-		if(right_ptr>=right_end || (left_ptr<left_end && *left_ptr<=*right_ptr)){
-			array[head++] = *left_ptr++;
+	while(i<left_len && j<right_len){
+		if(left_array[i] <= right_array[j]){
+			array[array_now++] = left_array[i++];
 		}
 		else{
-			array[head++] = *right_ptr++;
+			array[array_now++] = right_array[j++];
 		}
+	}
+	while(i<left_len){
+		array[array_now++] = left_array[i++];
+	}
+	while(j<right_len){
+		array[array_now++] = right_array[j++];
 	}
 
 	free(left_array);
