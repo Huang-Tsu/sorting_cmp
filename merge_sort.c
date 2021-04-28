@@ -10,6 +10,9 @@ void array_copy(int *dest, int *src, int head, int tail);
 
 void print_result(int *array, int cnt);
 
+//int *left_array;
+//int *right_array;
+
 int main(){
 	register int *array;
 	int cnt = 0;
@@ -17,6 +20,8 @@ int main(){
 	Timeval end;
 	unsigned long diff;
 	array = (int*)calloc((int)1e7, sizeof(int));
+	//left_array = (int*)calloc((int)1e7/2, sizeof(int));
+	//right_array = (int*)calloc((int)1e7/2, sizeof(int));
 
 	while(scanf("%d", &array[cnt]) != EOF) cnt++;
 
@@ -29,6 +34,8 @@ int main(){
 	//print_result(array, cnt);
 
 	free(array);
+	//free(left_array);
+	//free(right_array);
 	return 0;
 }
 void merge_sort(int *array, int head, int tail){
@@ -45,8 +52,8 @@ inline void merge(int *array, int head, int mid, int tail){
 	int i=0, j=0, array_now=head;
 	int left_len = mid-head+1;
 	int right_len = tail-mid;
-	int *left_array = (int*)calloc(left_len, sizeof(int));
-	int *right_array = (int*)calloc(right_len, sizeof(int));
+	int left_array[left_len];
+	int right_array[right_len];
 
 	array_copy(left_array, array, head, mid);
 	array_copy(right_array, array, mid+1, tail);
@@ -66,8 +73,6 @@ inline void merge(int *array, int head, int mid, int tail){
 		array[array_now++] = right_array[j++];
 	}
 
-	free(left_array);
-	free(right_array);
 }
 inline void array_copy(int *dest, int *src, int head, int tail){
 	int i = 0;
