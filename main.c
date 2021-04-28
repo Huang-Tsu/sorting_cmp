@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
-#define RAND_LEN (int)1e7
+#include "sorting.h"
+#define RAND_LEN (int)1e6
 
 typedef struct timeval Timeval;
 
@@ -14,11 +15,14 @@ int main(){
 	Timeval start;
 	Timeval end;
 	unsigned long diff;
+
 	for(int i=0; i<RAND_LEN; i++){
-		array_eng[i] = (char*)calloc(101, sizeof(char);
+		array_eng[i] = (char*)calloc(101, sizeof(char));
+		temp_rand_eng = (char**)calloc(101, sizeof(char));
 	}
 
-	read_rand(temp_rand_num);	
+	read_num_rand(temp_rand_num);	
+	read_eng_rand(temp_rand_eng);
 
 
 	gettimeofday(&start, NULL);
@@ -33,7 +37,9 @@ int main(){
 
 	for(int i=0; i<RAND_LEN; i++){
 		free(array_eng[i]);
+		free(temp_rand_eng[i]);
 	}
 	free(array_eng);
+	free(temp_rand_eng);
 	return 0;
 }

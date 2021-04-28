@@ -1,3 +1,5 @@
+#include "sorting.h"
+#include <stdio.h>
 void heap_sort(int *array, int len){
 	for(int i=len/2; i>0; i--){
 		heapify(array, i, len);

@@ -1,3 +1,5 @@
+#include "sorting.h"
+#include <stdio.h>
 void quick_sort(int *array, int head, int tail){
 	if(head >= tail) return;
 
