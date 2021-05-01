@@ -31,7 +31,7 @@ int main(){
 	copy_number_array(number_array, temp_random_number, RAND_LEN);	//copy_number_array(to, from, len)
 	//copy_english_array(temp_random_english, english_array, RAND_LEN);
 	gettimeofday(&start, NULL);
-	quick_sort(number_array, 0, RAND_LEN-1);
+	quick_sort(number_array, 0, RAND_LEN-1, compare_number);
 	gettimeofday(&end, NULL);
 	diff = 1000000*(end.tv_sec-start.tv_sec) + end.tv_usec-start.tv_usec;
 	printf("sorting time:%f\n", diff/1000000.0);
