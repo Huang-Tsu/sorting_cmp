@@ -11,6 +11,9 @@ void heap_sort(int *array, int len);
 void swap(int *a, int *b);
 	//make_rand
 void make_rand_num(int *array, int len);
-
-void read_num_rand(int *array);
-void read_eng_rand(char **array);
+	//input array
+void input_random_number(int *array);
+void input_random_english(char **array);
+	//copy array
+void copy_english_array(char **to, char **from, int len);
+void copy_number_array(int *to, int *from, int len);
