@@ -1,8 +1,13 @@
 #include "sorting.h"
 #include <stdio.h>
 #include <string.h>
-void quick_sort(void *array, int head, int tail,
-		int (*compare)(const void *, const void *)){
+void quick_sort(void **array, int head, int tail,
+		int (*compare)(void **array, int i, int j)){
+				/*
+					for(int i=0; i<(int)1e6; i++){
+						printf("%d\n", *(int*)array[i]);
+					}
+					*/
 
 	if(head >= tail) return;
 
@@ -12,27 +17,29 @@ void quick_sort(void *array, int head, int tail,
 
 	return;
 }
-inline int partition(void *array, int head, int tail,
-		int (*compare)(const void *, const void *)){
+inline int partition(void **array, int head, int tail,
+		int (*compare)(void **array, int i, int j)){
+			/*
+					for(int i=0; i<(int)1e6; i++){
+						printf("%d\n", *(int*)array[i]);
+					}
+				*/
+				/*
+					printf("compare(array, 1, 2):%d\n", compare(array, 1, 2));
+					printf("compare(array, 2, 1):%d\n", compare(array, 2, 1));
+					printf("compare(array, head-1, tail):%d\n", compare(array, head-1, tail));
+					*/
 
-		char **english;
-		int *number;
-	if(compare == strcmp) 
-	else 
-
-	int pivot = ptr[tail];
-	int temp;
+	int pivot = tail;
 	int i, j;
 	for(i=head-1, j=head; j<tail; j++){
-		if(compare(ptr[i], ptr[pivot]){
+		if(compare(array, j, pivot)<=0){
 			i++;
-			swap(&ptr[i], &ptr[j], sizeof(ptr[0]);
+			swap(array, i, j);
 		}
 	}
 	i++;
-	temp = ptr[j];
-	ptr[j] = ptr[i];
-	ptr[i] = temp;
+	swap(array, i, j);
 
 	return i;
 }

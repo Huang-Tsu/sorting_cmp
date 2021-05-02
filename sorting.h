@@ -1,8 +1,8 @@
 	//quick sort
-void quick_sort(void *array, int head, int tail,
-		int (*compare)(const void *, const void *));
-int partition(void *array, int head, int tail,
-		int (*compare)(const void *a, const void *b));
+void quick_sort(void **array, int head, int tail,
+		int (*compare)(void **array, int i, int j));
+int partition(void **array, int head, int tail,
+		int (*compare)(void **array, int i, int j));
 	//merge sort
 void merge_sort(int *array, int head, int tail);
 void merge(int *array, int head, int merge, int tail);
@@ -19,7 +19,7 @@ void input_random_english(char **array);
 void copy_english_array(char **to, char **from, int len);
 void copy_number_array(int **to, int **from, int len);
 	//compare function
-int compare_number(const void *a, const void *b);
+int compare_number(void **array, int i, int j);
 int compare_english(const void *a, const void *b);
 
-void swap(void *a, void *b, int width);
+void swap(void **array, int i, int j);

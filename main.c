@@ -6,9 +6,10 @@
 
 typedef struct timeval Timeval;
 
+int *temp_number_array[RAND_LEN];
+int *number_array[RAND_LEN];
+
 int main(){
-	int *temp_number_array[RAND_LEN];
-	int number_array[RAND_LEN][1];
 	//register int *number_array = (int*)calloc((int)1e7, sizeof(int));
 	//register int *temp_random_number = (int*)calloc((int)1e7, sizeof(int));
 	//register char **english_array = (char**)calloc((int)1e7, sizeof(char*));
@@ -17,12 +18,12 @@ int main(){
 	Timeval end;
 	unsigned long diff;
 
-	/*
 	for(int i=0; i<RAND_LEN; i++){
-		english_array[i] = (char*)calloc(101, sizeof(char));
-		temp_random_english[i] = (char*)calloc(101, sizeof(char));
+		temp_number_array[i] = (int*)calloc(1, sizeof(int));
+		number_array[i] = (int*)calloc(1, sizeof(int));
+		//english_array[i] = (char*)calloc(101, sizeof(char));
+		//temp_random_english[i] = (char*)calloc(101, sizeof(char));
 	}
-	*/
 		printf("Finished allocation.\n");
 
 		//initialize
@@ -36,15 +37,20 @@ int main(){
 	quick_sort(number_array, 0, RAND_LEN-1, compare_number);
 	gettimeofday(&end, NULL);
 	diff = 1000000*(end.tv_sec-start.tv_sec) + end.tv_usec-start.tv_usec;
-	printf("sorting time:%f\n", diff/1000000.0);
-	//print_result(number_array, cnt);
+	//printf("sorting time:%f\n", diff/1000000.0);
 
-	/*
+		for(int i=0; i<RAND_LEN; i++){
+			printf("%d\n", number_array[i][0]);
+		}
+		
+		
+
 	for(int i=0; i<RAND_LEN; i++){
-		free(english_array[i]);
-		free(temp_random_english[i]);
+		free(temp_number_array[i]);
+		free(number_array[i]);
+		//free(english_array[i]);
+		//free(temp_random_english[i]);
 	}
-	*/
 	//free(number_array);
 	//free(english_array);
 	//free(temp_random_number);
