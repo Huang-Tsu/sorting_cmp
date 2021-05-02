@@ -29,11 +29,11 @@ void copy_number_array(int **to, int **from, int len){
 	}
 }
 	//compare function
-int compare_number(void **array, int i, int j){
-	return *(int*)array[i] - *(int*)array[j];
+int compare_number(const void *a, const void *b){
+	return *(int*)a - *(int*)b;
 }
-int compare_english(void **array, int i, int j){
-	return strcmp((char*)array[i], (char*)array[j]);
+int compare_english(const void *a, const void *b){
+	return strcmp((char*)a, (char*)b);
 }
 void swap(void *array[], int i, int j){
 	void *temp = array[i];

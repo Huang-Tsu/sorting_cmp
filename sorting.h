@@ -3,9 +3,9 @@
 #include <sys/time.h>
 	//quick sort
 void quick_sort(void **array, int head, int tail,
-		int (*compare)(void **array, int i, int j));
+		int (*compare)(const void *a, const void *b));
 int partition(void **array, int head, int tail,
-		int (*compare)(void **array, int i, int j));
+		int (*compare)(const void *a, const void *b));
 	//merge sort
 void merge_sort(int *array, int head, int tail);
 void merge(int *array, int head, int merge, int tail);
@@ -22,8 +22,8 @@ void input_random_english(char **array, FILE *fp, int len );
 void copy_english_array(char **to, char **from, int len);
 void copy_number_array(int **to, int **from, int len);
 	//compare function
-int compare_number(void **array, int i, int j);
-int compare_english(void **array, int i, int j);
+int compare_number(const void *a, const void *b);
+int compare_english(const void *a, const void *b);
 	//swap function
 void swap(void **array, int i, int j);
 	//print function

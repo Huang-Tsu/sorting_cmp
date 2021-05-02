@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 void quick_sort(void **array, int head, int tail,
-		int (*compare)(void **array, int i, int j)){
+		int (*compare)(const void *a, const void *b)){
 
 	if(head >= tail) return;
 
@@ -13,12 +13,12 @@ void quick_sort(void **array, int head, int tail,
 	return;
 }
 inline int partition(void **array, int head, int tail,
-		int (*compare)(void **array, int i, int j)){
+		int (*compare)(const void *a, const void *b)){
 
 	int pivot = tail;
 	int i, j;
 	for(i=head-1, j=head; j<tail; j++){
-		if(compare(array, j, pivot)<=0){
+		if(compare(array[j], array[pivot])<=0){
 			i++;
 			swap(array, i, j);
 		}
