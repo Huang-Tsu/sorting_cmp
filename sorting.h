@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/time.h>
 	//quick sort
 void quick_sort(void **array, int head, int tail,
 		int (*compare)(void **array, int i, int j));
@@ -13,13 +16,16 @@ void heap_sort(int *array, int len);
 	//make_rand
 void make_rand_num(int *array, int len);
 	//input array
-void input_random_number(int **array);
-void input_random_english(char **array);
+void input_random_number(int **array, FILE *fp, int len);
+void input_random_english(char **array, FILE *fp, int len );
 	//copy array
 void copy_english_array(char **to, char **from, int len);
 void copy_number_array(int **to, int **from, int len);
 	//compare function
 int compare_number(void **array, int i, int j);
-int compare_english(const void *a, const void *b);
-
+int compare_english(void **array, int i, int j);
+	//swap function
 void swap(void **array, int i, int j);
+	//print function
+void print_number_array(int **input, int len);
+void print_english_array(char **input, int len);

@@ -3,19 +3,17 @@
 #include <stdlib.h>
 #include <string.h>
 	//input data function
-void input_random_number(int **array){
-		puts("Hi! I am in input_random_number.");
+void input_random_number(int **array, FILE *fp, int len){
 	int i=0;
-	while(scanf("%d", &array[i++][0]) !=EOF)
-		;
-		printf("Finished read number.\n");
+	while(i<len){
+		fscanf(fp, "%d", &array[i++][0]);
+	}
 }
-void input_random_english(char **array){
-		puts("Hi! I am in input_random_english.");
+void input_random_english(char **array, FILE *fp, int len){
 	int i=0;
-	while(scanf("%s", array[i++]) !=EOF)
-		;
-		printf("Finished read english.\n");
+	while(i<len){
+		fscanf(fp, "%s", array[i++]); 
+	}
 }
 	//copy function
 void copy_english_array(char **to, char **from, int len){
@@ -23,25 +21,33 @@ void copy_english_array(char **to, char **from, int len){
 	for(i=0; i<len; i++){
 		strcpy(to[i], from[i]);
 	}
-		printf("Finished copy english.\n");
-	
 }
 void copy_number_array(int **to, int **from, int len){
 	int i;
 	for(i=0; i<len; i++){
 		to[i][0] = from[i][0];
 	}
-		printf("Finished copy number.\n");
 }
 	//compare function
 int compare_number(void **array, int i, int j){
 	return *(int*)array[i] - *(int*)array[j];
 }
-int compare_english(const void *a, const void *b){
-	return strcmp(*(char**)a, *(char**)b);
+int compare_english(void **array, int i, int j){
+	return strcmp((char*)array[i], (char*)array[j]);
 }
 void swap(void *array[], int i, int j){
 	void *temp = array[i];
 	array[i] = array[j];
 	array[j] = temp;
+}
+
+void print_number_array(int **input, int len){
+	for(int i=0; i<len; i++){
+		printf("%d\n", *input[i]);
+	}
+}
+void print_english_array(char **input, int len){
+	for(int i=0; i<len; i++){
+		printf("%s\n", input[i]);
+	}
 }
