@@ -1,38 +1,36 @@
 #include "sorting.h"
 #include <stdio.h>
-void heap_sort(int *array, int len){
-	for(int i=len/2; i>0; i--){
-		heapify(array, i, len);
+void heap_sort(void **array, int end_idx,
+		int (*compare)(const void *a, const void *b)){
+	for(int i=(end_idx-1)/2; i>=0; i--){
+		heapify(array, i, end_idx, compare);
 	}
 
-	while(len>1){
-		swap(&array[1], &array[len--]);
-		heapify(array, 1, len);
+	while(end_idx>=0){
+		swap(array, 0, end_idx--);
+		heapify(array, 0, end_idx, compare);
 	}
 }
-void heapify(int *array, int root, int len){
-	if(root*2 > len) return;	
+void heapify(void **array, int root, int end_idx,
+		int (*compare)(const void *a, const void *b)){
+	if(root*2+1 > end_idx) return;	
 
 	int largest = root;
-	int left = root*2;
-	int right = root*2+1;
+	int left = root*2+1;
+	int right = root*2+2;
 
-	if(array[left]>array[largest]){ 
+	if(compare(array[left], array[largest]) >= 0){ 
 		largest = left;
 	}
-	if(right<=len && array[right]>array[largest]){
+	if(right<=end_idx && compare(array[right], array[largest]) >= 0){
 		largest = right;
 	}
 
 	if(largest != root){
-		swap(&array[root], &array[largest]);
-		heapify(array, largest, len);
+		swap(array, root, largest);
+		heapify(array, largest, end_idx, compare);
 	}
-	else return;
 
-}
-void swap(int *a, int *b){
-	int temp = *a;
-	*a = *b;
-	*b = temp;
+	return;
+
 }
