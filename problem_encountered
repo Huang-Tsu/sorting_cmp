@@ -9,5 +9,5 @@
 
 3.如果把<stdio.h> #include 在main.c裡，在sorting.h裡就沒有辦法宣告FILE *fp 了
 	
-	
+4. 第二次使用同一個sort 排序相同的型態十(int or char)會比第一次慢，但第二次之後的速度都差不多
 

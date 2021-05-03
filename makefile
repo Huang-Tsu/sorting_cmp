@@ -1,4 +1,4 @@
-whole:= main.o quick.o side_function.o #heap.o merge.o
+whole:= main.o quick.o side_function.o merge.o #heap.o 
 CFLAG:=-Wall -g -fsanitize=undefined -fsanitize=address -fsanitize=leak
 all: $(whole) 				
 	@echo "gcc $(whole) -o main\n"

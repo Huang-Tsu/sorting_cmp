@@ -7,9 +7,11 @@ void quick_sort(void **array, int head, int tail,
 int partition(void **array, int head, int tail,
 		int (*compare)(const void *a, const void *b));
 	//merge sort
-void merge_sort(int *array, int head, int tail);
-void merge(int *array, int head, int merge, int tail);
-void array_copy(int *dest, int *src, int head, int tail);
+void merge_sort(void **array, int head, int tail,
+		int (*compare)(const void *a, const void *b));
+void merge(void **array, int head, int merge, int tail,
+		int (*compare)(const void *a, const void *b));
+void array_copy_for_merge_sort(void **dest, void **src, int head, int tail);
 	//heap sort
 void heapify(int *array, int root, int len);
 void heap_sort(int *array, int len);

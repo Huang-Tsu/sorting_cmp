@@ -7,7 +7,6 @@ int *temp_number_array[RAND_LEN];
 int *number_array[RAND_LEN];
 char *english_array[RAND_LEN];
 char *temp_english_array[RAND_LEN];
-
 int main(){
 	FILE *fp;
 	//register int *number_array = (int*)calloc((int)1e7, sizeof(int));
@@ -42,23 +41,77 @@ int main(){
 	input_random_english(temp_english_array, fp, RAND_LEN);
 	fclose(fp);
 
+		//quick sort
+			//quick_sort_num
+//for(int i=0; i<10; i++){
 	copy_number_array(number_array, temp_number_array, RAND_LEN);	//copy_number_array(to, from, len)
-	copy_english_array(english_array, temp_english_array, RAND_LEN);
-	
 	gettimeofday(&start, NULL);
-	quick_sort(number_array, 0, RAND_LEN-1, compare_number);
+	quick_sort((void**)number_array, 0, RAND_LEN-1, compare_number);
 	gettimeofday(&end, NULL);
 	diff = 1000000*(end.tv_sec-start.tv_sec) + end.tv_usec-start.tv_usec;
-	printf("number sorting time:%f\n", diff/1000000.0);
+	printf("Quick_sort number sorting time:%f\n", diff/1000000.0);
+	//print_number_array(number_array, RAND_LEN);
+//}
+
+			//quick_sort_str
+//for(int i=0; i<10; i++){
+	copy_english_array(english_array, temp_english_array, RAND_LEN);
+	gettimeofday(&start, NULL);
+	quick_sort((void**)english_array, 0, RAND_LEN-1, compare_english);
+	gettimeofday(&end, NULL);
+	diff = 1000000*(end.tv_sec-start.tv_sec) + end.tv_usec-start.tv_usec;
+	printf("Quick_sort english sorting time:%f\n", diff/1000000.0);
+	//print_english_array(english_array, RAND_LEN);
+//}
+					copy_number_array(number_array, temp_number_array, RAND_LEN);	//copy_number_array(to, from, len)
+					gettimeofday(&start, NULL);
+					quick_sort((void**)number_array, 0, RAND_LEN-1, compare_number);
+					gettimeofday(&end, NULL);
+					diff = 1000000*(end.tv_sec-start.tv_sec) + end.tv_usec-start.tv_usec;
+					printf("Quick_sort number sorting time:%f\n", diff/1000000.0);
+					//print_number_array(number_array, RAND_LEN);
+	/*
+
+
+	   //merge sort
+			//merge_sort_num
+	copy_number_array(number_array, temp_number_array, RAND_LEN);	//copy_number_array(to, from, len)
+	gettimeofday(&start, NULL);
+	merge_sort((void**)number_array, 0, RAND_LEN-1, compare_number);
+	gettimeofday(&end, NULL);
+	diff = 1000000*(end.tv_sec-start.tv_sec) + end.tv_usec-start.tv_usec;
+	//printf("1. Merge_sort number sorting time:%f\n", diff/1000000.0);
 	//print_number_array(number_array, RAND_LEN);
 
+			//merge_sort_str
+	copy_english_array(english_array, temp_english_array, RAND_LEN);
 	gettimeofday(&start, NULL);
-	quick_sort(english_array, 0, RAND_LEN-1, compare_english);
+	merge_sort((void**)english_array, 0, RAND_LEN-1, compare_english);
 	gettimeofday(&end, NULL);
 	diff = 1000000*(end.tv_sec-start.tv_sec) + end.tv_usec-start.tv_usec;
-	printf("english sorting time:%f\n", diff/1000000.0);
+	printf("Merge_sort english sorting time:%f\n", diff/1000000.0);
 	//print_english_array(english_array, RAND_LEN);
-	
+	*/
+
+
+		//heap sort
+			//heap_sort_num
+	copy_number_array(number_array, temp_number_array, RAND_LEN);	//copy_number_array(to, from, len)
+	gettimeofday(&start, NULL);
+	heap_sort((void**)number_array, 0, RAND_LEN-1, compare_number);
+	gettimeofday(&end, NULL);
+	diff = 1000000*(end.tv_sec-start.tv_sec) + end.tv_usec-start.tv_usec;
+	//printf("heap_sort number sorting time:%f\n", diff/1000000.0);
+	//print_number_array(number_array, RAND_LEN);
+
+			//heap_sort_str
+	copy_english_array(english_array, temp_english_array, RAND_LEN);
+	gettimeofday(&start, NULL);
+	heap_sort((void**)english_array, 0, RAND_LEN-1, compare_english);
+	gettimeofday(&end, NULL);
+	diff = 1000000*(end.tv_sec-start.tv_sec) + end.tv_usec-start.tv_usec;
+	printf("heap_sort english sorting time:%f\n", diff/1000000.0);
+	//print_english_array(english_array, RAND_LEN);
 
 	for(int i=0; i<RAND_LEN; i++){
 		free(temp_number_array[i]);
