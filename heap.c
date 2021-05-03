@@ -6,7 +6,7 @@ void heap_sort(void **array, int end_idx,
 		heapify(array, i, end_idx, compare);
 	}
 
-	while(end_idx>=0){
+	while(end_idx>0){
 		swap(array, 0, end_idx--);
 		heapify(array, 0, end_idx, compare);
 	}
