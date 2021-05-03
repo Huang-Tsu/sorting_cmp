@@ -95,7 +95,6 @@ for(int i=0; i<5; i++){
 	printf("Merge_sort english sorting time:%f\n", diff/1000000.0);
 	//print_english_array(english_array, RAND_LEN);
 }	
-*/
 
 		//heap sort
 			//Number
@@ -105,7 +104,7 @@ for(int i=0; i<5; i++){
 	heap_sort((void**)number_array, RAND_LEN-1, compare_number);
 	gettimeofday(&end, NULL);
 	diff = 1000000*(end.tv_sec-start.tv_sec) + end.tv_usec-start.tv_usec;
-	//printf("heap_sort number sorting time:%f\n", diff/1000000.0);
+	printf("heap_sort number sorting time:%f\n", diff/1000000.0);
 	//print_number_array(number_array, RAND_LEN);
 }
 			//English
@@ -115,8 +114,8 @@ for(int i=0; i<5; i++){
 	heap_sort((void**)english_array, RAND_LEN-1, compare_english);
 	gettimeofday(&end, NULL);
 	diff = 1000000*(end.tv_sec-start.tv_sec) + end.tv_usec-start.tv_usec;
-	//printf("heap_sort english sorting time:%f\n", diff/1000000.0);
-	print_english_array(english_array, RAND_LEN);
+	printf("heap_sort english sorting time:%f\n", diff/1000000.0);
+	//print_english_array(english_array, RAND_LEN);
 }
 		//free allocated memory
 	for(int i=0; i<RAND_LEN; i++){
