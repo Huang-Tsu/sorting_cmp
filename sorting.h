@@ -25,6 +25,7 @@ void input_random_english(char **array, FILE *fp, int len );
 	//copy array
 void copy_english_array(char **to, char **from, int len);
 void copy_number_array(int **to, int **from, int len);
+void copy_array(void** to, void **from, int len);
 	//compare function
 int compare_number(const void *a, const void *b);
 int compare_english(const void *a, const void *b);

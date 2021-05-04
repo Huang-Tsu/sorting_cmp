@@ -28,6 +28,12 @@ inline void copy_number_array(int **to, int **from, int len){
 		to[i][0] = from[i][0];
 	}
 }
+inline void copy_array(void** to, void **from, int len){
+	int i;
+	for(i=0; i<len; i++){
+		to[i] = from[i];
+	}
+}
 	//compare function
 inline int compare_number(const void *a, const void *b){
 	return *(int*)a - *(int*)b;
