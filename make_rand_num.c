@@ -1,10 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void make_rand_num(int *array, int len){
+int main(){
+	int total;
 	int i=0;
 
-	while(i<len){
-		array[i] = rand();
+	scanf("%d", &total);
+
+	while(i++<total){
+		printf("%d\n", rand());
 	}
+
+	return 0;
 }
