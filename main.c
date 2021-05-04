@@ -1,5 +1,6 @@
 #include "sorting.h"
-#define RAND_LEN (int)1e6
+#define RAND_LEN ((int)1e6*3)
+#define UNIT_LEN ((int)1e5*5)
 
 typedef struct timeval Timeval;
 
@@ -9,10 +10,8 @@ char *english_array[RAND_LEN];
 char *temp_english_array[RAND_LEN];
 int main(){
 	FILE *fp;
-	//register int *number_array = (int*)calloc((int)1e7, sizeof(int));
-	//register int *temp_random_number = (int*)calloc((int)1e7, sizeof(int));
-	//register char **english_array = (char**)calloc((int)1e7, sizeof(char*));
-	//register char **temp_random_english = (char**)calloc((int)1e7, sizeof(char*));
+	double sum;
+	int k;
 	Timeval start;
 	Timeval end;
 	unsigned long diff;
@@ -23,102 +22,133 @@ int main(){
 	}
 
 		//initialize
-	fp = fopen("./test_data/dataset1.txt", "r");
+	fp = fopen("./test_data/dataset_num.txt", "r");
 		if(fp == NULL){
-			fprintf(stderr, "dataset1檔案開啟失敗\n");
+			fprintf(stderr, "dataset_num.txt檔案開啟失敗\n");
 				exit(1);
 		}
 	input_random_number(temp_number_array, fp, RAND_LEN);	
 	fclose(fp);
 
-	fp = fopen("./test_data/dataset2.txt", "r");
+	fp = fopen("./test_data/dataset_eng.txt", "r");
 		if(fp == NULL){
-			fprintf(stderr, "dataset2檔案開啟失敗\n");
+			fprintf(stderr, "dataset_eng.txt檔案開啟失敗\n");
 				exit(1);
 		}
 	input_random_english(temp_english_array, fp, RAND_LEN);
 	fclose(fp);
+
 		//quick sort
 			//Number
-for(int i=0; i<5; i++){
-	copy_array((void**)number_array, (void**)temp_number_array, RAND_LEN);	//copy_array(to, from, len)
-	gettimeofday(&start, NULL);
-	quick_sort((void**)number_array, 0, RAND_LEN-1, compare_number);
-	gettimeofday(&end, NULL);
-	diff = 1000000*(end.tv_sec-start.tv_sec) + end.tv_usec-start.tv_usec;
-	printf("First quick_sort number sorting time:%f\n", diff/1000000.0);
-	//print_number_array(number_array, RAND_LEN);
-}
-				printf("___________________________________________\n");
+	printf("Quick sort start!\n");
+	for(int i=1; i<=6; i++){
+		k = 0;
+		sum = 0;
+		while(k++<3){
+			copy_array((void**)number_array, (void**)temp_number_array, UNIT_LEN*i);	//copy_array(to, from, len)
+			gettimeofday(&start, NULL);
+			quick_sort((void**)number_array, 0, UNIT_LEN*i-1, compare_number);
+			gettimeofday(&end, NULL);
+			diff = 1000000*(end.tv_sec-start.tv_sec) + end.tv_usec-start.tv_usec;
+			sum += diff/(1000000.0);
+			//print_number_array(number_array, UNIT_LEN*i);
+		}
+			printf("Sorting %d number average time,%f\n", UNIT_LEN*i, sum/3);
+	}
+				printf("------------------------------------------\n");
 
 			//English
-for(int i=0; i<5; i++){
-	copy_array((void**)english_array, (void**)temp_english_array, RAND_LEN);
-	gettimeofday(&start, NULL);
-	quick_sort((void**)english_array, 0, RAND_LEN-1, compare_english);
-	gettimeofday(&end, NULL);
-	diff = 1000000*(end.tv_sec-start.tv_sec) + end.tv_usec-start.tv_usec;
-	printf("Quick_sort english sorting time:%f\n", diff/1000000.0);
-	//print_english_array(english_array, RAND_LEN);
-}
-				printf("___________________________________________\n");
+	for(int i=1; i<=6; i++){
+		k = 0;
+		sum = 0;
+		while(k++<3){
+			copy_array((void**)english_array, (void**)temp_english_array, UNIT_LEN*i);
+			gettimeofday(&start, NULL);
+			quick_sort((void**)english_array, 0, UNIT_LEN*i-1, compare_english);
+			gettimeofday(&end, NULL);
+			diff = 1000000*(end.tv_sec-start.tv_sec) + end.tv_usec-start.tv_usec;
+			sum += diff/(1000000.0);
+			//print_english_array(english_array, UNIT_LEN*i);
+		}
+			printf("Sorting %d english average time,%f\n", UNIT_LEN*i, sum/3);
+	}
+				printf("___________________________________________\n\n");
 
-
-	   //merge sort
+		//merge sort
 			//Number
-for(int i=0; i<5; i++){
-	copy_array((void**)number_array, (void**)temp_number_array, RAND_LEN);	//copy_array(to, from, len)
-	gettimeofday(&start, NULL);
-	merge_sort((void**)number_array, 0, RAND_LEN-1, compare_number);
-	gettimeofday(&end, NULL);
-	diff = 1000000*(end.tv_sec-start.tv_sec) + end.tv_usec-start.tv_usec;
-	printf("Merge_sort number sorting time:%f\n", diff/1000000.0);
-	//print_number_array(number_array, RAND_LEN);
-}
-				printf("___________________________________________\n");
-			//English
-for(int i=0; i<5; i++){
-	copy_array((void**)english_array, (void**)temp_english_array, RAND_LEN);
-	gettimeofday(&start, NULL);
-	merge_sort((void**)english_array, 0, RAND_LEN-1, compare_english);
-	gettimeofday(&end, NULL);
-	diff = 1000000*(end.tv_sec-start.tv_sec) + end.tv_usec-start.tv_usec;
-	printf("Merge_sort english sorting time:%f\n", diff/1000000.0);
-	//print_english_array(english_array, RAND_LEN);
-}	
-				printf("___________________________________________\n");
+	printf("Merge sort start!\n");
+	for(int i=1; i<=6; i++){
+		k = 0;
+		sum = 0;
+		while(k++<3){
+			copy_array((void**)number_array, (void**)temp_number_array, UNIT_LEN*i);	//copy_array(to, from, len)
+			gettimeofday(&start, NULL);
+			merge_sort((void**)number_array, 0, UNIT_LEN*i-1, compare_number);
+			gettimeofday(&end, NULL);
+			diff = 1000000*(end.tv_sec-start.tv_sec) + end.tv_usec-start.tv_usec;
+			sum += diff/(1000000.0);
+			//print_number_array(number_array, UNIT_LEN*i);
+		}
+			printf("Sorting %d number average time,%f\n", UNIT_LEN*i, sum/3);
+	}
+				printf("------------------------------------------\n");
 
+			//English
+	for(int i=1; i<=6; i++){
+		k = 0;
+		sum = 0;
+		while(k++<3){
+			copy_array((void**)english_array, (void**)temp_english_array, UNIT_LEN*i);
+			gettimeofday(&start, NULL);
+			merge_sort((void**)english_array, 0, UNIT_LEN*i-1, compare_english);
+			gettimeofday(&end, NULL);
+			diff = 1000000*(end.tv_sec-start.tv_sec) + end.tv_usec-start.tv_usec;
+			sum += diff/(1000000.0);
+			//print_english_array(english_array, UNIT_LEN*i);
+		}
+			printf("Sorting %d english average time,%f\n", UNIT_LEN*i, sum/3);
+	}
+				printf("___________________________________________\n\n");
 		//heap sort
 			//Number
-for(int i=0; i<10; i++){
-	copy_array((void**)number_array, (void**)temp_number_array, RAND_LEN);	//copy_array(to, from, len)
-	gettimeofday(&start, NULL);
-	heap_sort((void**)number_array, RAND_LEN-1, compare_number);
-	gettimeofday(&end, NULL);
-	diff = 1000000*(end.tv_sec-start.tv_sec) + end.tv_usec-start.tv_usec;
-	printf("heap_sort number sorting time:%f\n", diff/1000000.0);
-	//print_number_array(number_array, RAND_LEN);
-}
-				printf("___________________________________________\n");
-			//English
-for(int i=0; i<10; i++){
-	copy_array((void**)english_array, (void**)temp_english_array, RAND_LEN);
-	gettimeofday(&start, NULL);
-	heap_sort((void**)english_array, RAND_LEN-1, compare_english);
-	gettimeofday(&end, NULL);
-	diff = 1000000*(end.tv_sec-start.tv_sec) + end.tv_usec-start.tv_usec;
-	printf("heap_sort english sorting time:%f\n", diff/1000000.0);
-	//print_english_array(english_array, RAND_LEN);
-}
+	printf("Heap sort start!\n");
+	for(int i=1; i<=6; i++){
+		k = 0;
+		sum = 0;
+		while(k++<3){
+			copy_array((void**)number_array, (void**)temp_number_array, UNIT_LEN*i);	//copy_array(to, from, len)
+			gettimeofday(&start, NULL);
+			heap_sort((void**)number_array, UNIT_LEN*i-1, compare_number);
+			gettimeofday(&end, NULL);
+			diff = 1000000*(end.tv_sec-start.tv_sec) + end.tv_usec-start.tv_usec;
+			sum += diff/(1000000.0);
+			//print_number_array(number_array, UNIT_LEN*i);
+		}
+			printf("Sorting %d number average time,%f\n", UNIT_LEN*i, sum/3);
+	}
+				printf("------------------------------------------\n");
 
+			//English
+	for(int i=1; i<=6; i++){
+		k = 0;
+		sum = 0;
+		while(k++<3){
+			copy_array((void**)english_array, (void**)temp_english_array, UNIT_LEN*i);
+			gettimeofday(&start, NULL);
+			heap_sort((void**)english_array, UNIT_LEN*i-1, compare_english);
+			gettimeofday(&end, NULL);
+			diff = 1000000*(end.tv_sec-start.tv_sec) + end.tv_usec-start.tv_usec;
+			sum += diff/(1000000.0);
+			//print_english_array(english_array, UNIT_LEN*i);
+		}
+			printf("Sorting %d english average time,%f\n", UNIT_LEN*i, sum/3);
+	}
+				printf("___________________________________________\n\n");
+	printf("Sorting completed.\n");
 		//free allocated memory
-	for(int i=0; i<RAND_LEN; i++){
+	for(int i=1; i<RAND_LEN; i++){
 		free(temp_number_array[i]);
 		free(temp_english_array[i]);
 	}
-	//free(number_array);
-	//free(english_array);
-	//free(temp_random_number);
-	//free(temp_english_array);
 	return 0;
 }

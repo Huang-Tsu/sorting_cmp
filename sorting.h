@@ -15,7 +15,7 @@ void array_copy_for_merge_sort(void **dest, void **src, int head, int tail);
 	//heap sort
 void heapify(void **array, int root, int len,
 		int (*compare)(const void *a, const void *b));
-void heap_sort(void **array, int len,
+void heap_sort(void **array, int end_idx,
 		int (*compare)(const void *a, const void *b));
 	//make_rand
 void make_rand_num(int *array, int len);
