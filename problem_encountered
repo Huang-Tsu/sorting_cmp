@@ -10,4 +10,12 @@
 3.如果把<stdio.h> #include 在main.c裡，在sorting.h裡就沒有辦法宣告FILE *fp 了
 	
 4. 第二次使用同一個sort 排序相同的型態十(int or char)會比第一次慢，但第二次之後的速度都差不多
+	sor -> 找到會比較慢的原因了!
+			因為我儲存資料的方法是，用指標陣列來儲存資料(both integer and string)
+				然後把亂數資料先儲存到temp指標陣列裡每個指標所指向的地方
+				每次要sorting前，把temp指標陣列所指向的值，複製到要被sorted的array(指標陣列)所指向的地方
+				然而我的sorting是對array指標陣列裡所儲存的指標順序進行排序
+				因此下一次複製時，array指標陣列的順序跟原先已經不一樣，只有其上的值會被蟲製成亂數
 
+				現在改成用把temp的指標複製到array
+				然後排序array指標的順序
