@@ -10,20 +10,20 @@ char *temp_english_array[RAND_LEN];
 int main(){
 	FILE *fp;
 	Sorting sorts[3] = {quick_sort, merge_sort, heap_sort};		//宣告函式紙標陣列
-	char *sorting_name[3] = {"\033[3m\033[1mQuick sort:\033[m",
+	char *sorting_name[3] = {"\033[3m\033[1mQuick sort:\033[m",	//奇怪的符號是讓print出來時變斜體還有粗體
 							"\033[3m\033[1mMerge sort:\033[m",
 							"\033[3m\033[1mHeap sort:\033[m"}; //用陣列紀錄sorting的名字
 
 
-	printf("Memory allocation...");
+	puts("Memory allocation...");
 	for(int i=0; i<RAND_LEN; i++){
 		temp_number_array[i] = (int*)calloc(1, sizeof(int));
 		temp_english_array[i] = (char*)calloc(101, sizeof(char));
 	}
-	puts("Done!");
+	puts("Done!\n");
 
 
-	printf("Read data...");
+	puts("Read data...");
 		//initialize
 	fp = fopen("./test_data/dataset_num.txt", "r");
 		if(fp == NULL){
