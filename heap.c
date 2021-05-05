@@ -1,6 +1,6 @@
 #include "sorting.h"
 #include <stdio.h>
-void heap_sort(void **array, int end_idx,
+void heap_sort(void **array, int head, int end_idx,
 		int (*compare)(const void *a, const void *b)){
 	for(int i=(end_idx-1)/2; i>=0; i--){
 		heapify(array, i, end_idx, compare);
