@@ -1,26 +1,29 @@
 #include "sorting.h"
 #define RAND_LEN ((int)1e6*3)
-#define UNIT_LEN ((int)1e5*5)
+#define UNIT_LEN ((int)1e4*25)
 
-typedef struct timeval Timeval;
+typedef void (*Sorting)(void **, int, int, 
+		int (*)(const void *, const void*));
 
 int *temp_number_array[RAND_LEN];
-int *number_array[RAND_LEN];
-char *english_array[RAND_LEN];
 char *temp_english_array[RAND_LEN];
 int main(){
 	FILE *fp;
-	double sum;
-	int k;
-	Timeval start;
-	Timeval end;
-	unsigned long diff;
+	Sorting sorts[3] = {quick_sort, merge_sort, heap_sort};		//宣告函式紙標陣列
+	char *sorting_name[3] = {"\033[3m\033[1mQuick sort:\033[m",
+							"\033[3m\033[1mMerge sort:\033[m",
+							"\033[3m\033[1mHeap sort:\033[m"}; //用陣列紀錄sorting的名字
 
+
+	printf("Memory allocation...");
 	for(int i=0; i<RAND_LEN; i++){
 		temp_number_array[i] = (int*)calloc(1, sizeof(int));
 		temp_english_array[i] = (char*)calloc(101, sizeof(char));
 	}
+	puts("Done!");
 
+
+	printf("Read data...");
 		//initialize
 	fp = fopen("./test_data/dataset_num.txt", "r");
 		if(fp == NULL){
@@ -37,118 +40,28 @@ int main(){
 		}
 	input_random_english(temp_english_array, fp, RAND_LEN);
 	fclose(fp);
+	puts("Done!\n");
 
-		//quick sort
-			//Number
-	printf("Quick sort start!\n");
-	for(int i=1; i<=6; i++){
-		k = 0;
-		sum = 0;
-		while(k++<3){
-			copy_array((void**)number_array, (void**)temp_number_array, UNIT_LEN*i);	//copy_array(to, from, len)
-			gettimeofday(&start, NULL);
-			quick_sort((void**)number_array, 0, UNIT_LEN*i-1, compare_number);
-			gettimeofday(&end, NULL);
-			diff = 1000000*(end.tv_sec-start.tv_sec) + end.tv_usec-start.tv_usec;
-			sum += diff/(1000000.0);
-			//print_number_array(number_array, UNIT_LEN*i);
-		}
-			printf("Sorting %d number average time,%f\n", UNIT_LEN*i, sum/3);
-	}
-				printf("------------------------------------------\n");
 
-			//English
-	for(int i=1; i<=6; i++){
-		k = 0;
-		sum = 0;
-		while(k++<3){
-			copy_array((void**)english_array, (void**)temp_english_array, UNIT_LEN*i);
-			gettimeofday(&start, NULL);
-			quick_sort((void**)english_array, 0, UNIT_LEN*i-1, compare_english);
-			gettimeofday(&end, NULL);
-			diff = 1000000*(end.tv_sec-start.tv_sec) + end.tv_usec-start.tv_usec;
-			sum += diff/(1000000.0);
-			//print_english_array(english_array, UNIT_LEN*i);
-		}
-			printf("Sorting %d english average time,%f\n", UNIT_LEN*i, sum/3);
-	}
-				printf("___________________________________________\n\n");
+	puts("Sorting start!\n");
+	for(int i=0; i<3; i++){
+		puts(sorting_name[i]);
+		puts("\tnumber...");
+		test_sorting_time((void**)temp_number_array, UNIT_LEN, sorts[i], compare_number);
 
-		//merge sort
-			//Number
-	printf("Merge sort start!\n");
-	for(int i=1; i<=6; i++){
-		k = 0;
-		sum = 0;
-		while(k++<3){
-			copy_array((void**)number_array, (void**)temp_number_array, UNIT_LEN*i);	//copy_array(to, from, len)
-			gettimeofday(&start, NULL);
-			merge_sort((void**)number_array, 0, UNIT_LEN*i-1, compare_number);
-			gettimeofday(&end, NULL);
-			diff = 1000000*(end.tv_sec-start.tv_sec) + end.tv_usec-start.tv_usec;
-			sum += diff/(1000000.0);
-			//print_number_array(number_array, UNIT_LEN*i);
-		}
-			printf("Sorting %d number average time,%f\n", UNIT_LEN*i, sum/3);
-	}
-				printf("------------------------------------------\n");
+		puts("----------------------------------");
 
-			//English
-	for(int i=1; i<=6; i++){
-		k = 0;
-		sum = 0;
-		while(k++<3){
-			copy_array((void**)english_array, (void**)temp_english_array, UNIT_LEN*i);
-			gettimeofday(&start, NULL);
-			merge_sort((void**)english_array, 0, UNIT_LEN*i-1, compare_english);
-			gettimeofday(&end, NULL);
-			diff = 1000000*(end.tv_sec-start.tv_sec) + end.tv_usec-start.tv_usec;
-			sum += diff/(1000000.0);
-			//print_english_array(english_array, UNIT_LEN*i);
-		}
-			printf("Sorting %d english average time,%f\n", UNIT_LEN*i, sum/3);
+		puts("\tenglish...");
+		test_sorting_time((void**)temp_english_array, UNIT_LEN, sorts[i], compare_english);
+		puts("___________________________________\n");
 	}
-				printf("___________________________________________\n\n");
-		//heap sort
-			//Number
-	printf("Heap sort start!\n");
-	for(int i=1; i<=6; i++){
-		k = 0;
-		sum = 0;
-		while(k++<3){
-			copy_array((void**)number_array, (void**)temp_number_array, UNIT_LEN*i);	//copy_array(to, from, len)
-			gettimeofday(&start, NULL);
-			heap_sort((void**)number_array, UNIT_LEN*i-1, compare_number);
-			gettimeofday(&end, NULL);
-			diff = 1000000*(end.tv_sec-start.tv_sec) + end.tv_usec-start.tv_usec;
-			sum += diff/(1000000.0);
-			//print_number_array(number_array, UNIT_LEN*i);
-		}
-			printf("Sorting %d number average time,%f\n", UNIT_LEN*i, sum/3);
-	}
-				printf("------------------------------------------\n");
-
-			//English
-	for(int i=1; i<=6; i++){
-		k = 0;
-		sum = 0;
-		while(k++<3){
-			copy_array((void**)english_array, (void**)temp_english_array, UNIT_LEN*i);
-			gettimeofday(&start, NULL);
-			heap_sort((void**)english_array, UNIT_LEN*i-1, compare_english);
-			gettimeofday(&end, NULL);
-			diff = 1000000*(end.tv_sec-start.tv_sec) + end.tv_usec-start.tv_usec;
-			sum += diff/(1000000.0);
-			//print_english_array(english_array, UNIT_LEN*i);
-		}
-			printf("Sorting %d english average time,%f\n", UNIT_LEN*i, sum/3);
-	}
-				printf("___________________________________________\n\n");
+					
 	printf("Sorting completed.\n");
 		//free allocated memory
 	for(int i=1; i<RAND_LEN; i++){
 		free(temp_number_array[i]);
 		free(temp_english_array[i]);
 	}
+
 	return 0;
 }
